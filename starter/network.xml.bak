@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<World name="myworld">
+<components name="CA" path="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\starter\gag-specification\CA.xml" port="988"/>
+<components name="CB" path="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\starter\gag-specification\CB.xml" port="989"/>
+</World>

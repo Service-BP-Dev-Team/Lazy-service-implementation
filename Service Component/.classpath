@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.xtend.XTEND_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="xtend-gen"/>
+	<classpathentry kind="lib" path="lib/jgraphx-4.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/weblaf-demo-1.2.13-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="lib/groovy/groovy-3.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb/jakarta.activation.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb/jakarta.xml.bind-api.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb/jaxb-core.jar"/>
+	<classpathentry kind="lib" path="lib/jaxb/jaxb-impl.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
