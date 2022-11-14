@@ -75,6 +75,18 @@ static String classPath ="E:\\PhD Recherche\\Implementation\\workspace-java\\Gag
 		String componentName =null;
 		String networkFile = null;
 		Network world = new Network();
+		
+		File currentDirFile = new File(".");
+		String helper = currentDirFile.getAbsolutePath();
+		try {
+			String currentDir = helper.substring(0, helper.length() - currentDirFile.getCanonicalPath().length());
+			System.out.println("the current dir is: "+ currentDir);
+			System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//this line may need a try-catch block
+
 		 System.out.println("Argument count: " + args.length);
 		    for (int i = 0; i < args.length; i++) {
 		        if((args[i].equals("--port") || args[i].equals("-p"))  && (i+1) < args.length) {

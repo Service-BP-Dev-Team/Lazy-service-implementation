@@ -80,15 +80,23 @@
 		<output name="decision" shortName="decision" />
 		<output name="grant suggestion" shortName="suggestion" />
 		<production name="decide" subServices="">
-		<guard location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Apply.guardDecide" />
+		<guard location="..\LocalFunctions\bin" method="cb.Apply.guardDecide" />
 		 <semantic>
 			  <function-declaration
-					location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Apply.system" name="system" />
+					location="..\LocalFunctions\bin" method="cb.Apply.system" name="system" />
 			  <function-declaration
-					location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Apply.decide" name="decide" />
+					location="..\LocalFunctions\bin" method="cb.Apply.decide" name="decide" />
 			 <function-declaration
-					location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Apply.grant" name="grant" />
-					
+					location="..\LocalFunctions\bin" method="cb.Apply.grant" name="grant" />
+		    
+				<action>
+					<leftpart service="Apply" parameter="decision" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="functionExpression" function="decide">
+						<arg service="Apply" parameter="syst" />
+					</rightpart>
+				</action>
 			<action>
 					<leftpart service="Apply" parameter="syst" />
 					<rightpart
@@ -97,14 +105,6 @@
 						<arg service="Apply" parameter="personal information" />
 						<arg service="Apply" parameter="cover letter" />
 						<arg service="Apply" parameter="resume" />
-					</rightpart>
-				</action>
-				<action>
-					<leftpart service="Apply" parameter="decision" />
-					<rightpart
-						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-						xsi:type="functionExpression" function="decide">
-						<arg service="Apply" parameter="syst" />
 					</rightpart>
 				</action>
 				<action>
@@ -127,10 +127,10 @@
 		<input name="decision" shortName="decision" />
 		<output name="receipt" shortName="receipt" />
 		<production name="Subscribe">
-		   <guard location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Subscribe.guardSubscribe" />
+		   <guard location="..\LocalFunctions\bin" method="cb.Subscribe.guardSubscribe" />
 		   <semantic>
 		      <function-declaration
-					location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Subscribe.subscribe" name="subscribe" />
+					location="..\LocalFunctions\bin" method="cb.Subscribe.subscribe" name="subscribe" />
 					
 				<action>
 					<leftpart service="Subscribe" parameter="receipt" />
@@ -143,10 +143,10 @@
 		   
 		</production>
 		<production name="terminate">
-		   <guard location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Subscribe.guardTerminate" />
+		   <guard location="..\LocalFunctions\bin" method="cb.Subscribe.guardTerminate" />
 		   <semantic>
 		    <function-declaration
-					location="D:\Implementation-to-deploy-book-order-simplified\Workspace-java-new-example\LocalFunctions\bin" method="cb.Subscribe.terminate" name="terminate" />
+					location="..\LocalFunctions\bin" method="cb.Subscribe.terminate" name="terminate" />
 		   
 				<action>
 					<leftpart service="Subscribe" parameter="receipt" />
