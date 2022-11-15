@@ -2,7 +2,7 @@
 
 The present repository stores the different java projects necessary to deploy and execute, service oriented and component-based applications specified with lazy services. The whole repository corresponds to an eclipse workspace constituted of three projects. By doing so, the easiest way to run the project is to clone the repository and used it as the workspace of an eclipse application. Here are the complete list of steps to setup the project in your computer:
 - Download the latest version of eclipse for java here : https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-java-developers ;
-- Clone or download the repository using the *git clone* command;
+- Clone (using *git clone*) or download the repository;
 - Extract and launch eclipse using the folder of the cloned repository as the eclipse workspace;.
 
 In order to test the behavior of lazy services, you can run the small example of  computer science school enrollment present in the repository. The example is described in the *Running example* section. Follow these steps to run the example:
@@ -18,21 +18,21 @@ To know more about lazy services read the next sections.
 # Notion of lazy/incremental service
 
 
-Basically, a 'lazy' service is a service that processes lazily its inputs ( as their values are needed in the service execution) and return incrementally its outputs (as their computation finish). This implies that a lazy service is capable of producing and output as soon as the subset of the inputs it depends on are available, regardless of the values of other inputs. By doing so, such service are suitable for higher distributive environment where the computation is performed over internet with multiples inputs sources, corresponding themselves as outputs of other ongoing services. Besides they allows to easily combine user activities and machine activities in service execution. In this manner, user skill can be easily automated in a composite lazy service which is obtained by combining automated program and  user interactions. A typical form of a lazy service looks  like :
+Basically, a 'lazy' service is a service that processes lazily its inputs ( as their values are needed in the service execution) and return incrementally its outputs (as their computation finish). This implies that a lazy service is capable of producing and output as soon as the subset of the inputs it depends on are available, regardless of the avaibility of other inputs. By doing so, such services are suitable for higher distributive environment where the computation is performed over internet with multiples inputs sources, corresponding themselves as outputs of other ongoing services. Besides they allows to easily combine user activities and machine activities in service execution. In this manner, user skill can be easily automated in a composite lazy service which is obtained by combining automated program and  user interactions. A typical form of a lazy service looks  like :
    
       
       
-**ServiceName**( inputs ) < outputs > = {  
+**ServiceName**( inputs ) ⟨ outputs ⟩ = {  
 
 var = *ordinaryFunction* ( inputs ) ;   
-**subService** ( inputs ) < outputs >;   
+**subService** ( inputs ) ⟨ outputs ⟩;   
 varU = *userActivity* ( inputs );   
 ...  
 }
    
       
       
- Stating that the composite service being defined is composed of a set of ordinary computations (for instance Rest, SOAP, BPEL, Open API services, or even compiled procedure of genaral purpose languages such as JAVA, C, C++); a set of sub lazy services and a set of executions implying user activities. From an implementation viewpoint, ordinary functions and user activities can be handled by call to features of pre-compiled or existing programms.
+ Stating that the composite service being defined is composed of a set of ordinary computations (for instance Rest, SOAP, BPEL, Open API services, or even compiled procedure of general purpose languages such as JAVA, C, C++); a set of sub lazy services and a set of executions implying user activities. From an implementation viewpoint, ordinary functions and user activities can be handled by call to features of pre-compiled or existing programms.
  
  # Running Example
  To better explain the behavior of a lazy service, let's play with the small example of course enrollment in a competitive computer science school. 
@@ -43,7 +43,8 @@ The process starts when a student wants to enroll to a certification session of 
  where the infos, resume and letter are the inputs of the service (the information coming from the student) and the result and grantSuggestion are the outputs of the service (the data it has to produce). The result represents the decision of the registration committee about the application, while the grantSuggestion are the grants that the committee recommends the student to apply in order to fund his training. Nevertheless the student can still pay his session with his debit card or obtain a grant from an organization not belonging to the suggestion. At the second stage, the student has to pay or obtain a grant and select one of the school classes (week day or weekend day) according to his availability. This second step can also be described by a service :
 **Subscribe** (session, committeeDecision, debitCredential/Grant)⟨Receipt⟩.
 
-In this manner, an intuitive way to define the composite service handling the enrollment process may be like this :
+In this manner, an intuitive way to define the composite service handling the enrollment process may be like this :  
+
 **Register**( infos, letter, resume, class, debitCredential/Grant)⟨ decision, grantSuggestion,receipt⟩
 
 =
@@ -189,4 +190,4 @@ The code above describes the complete behavior of the composite service *registe
 	</service>
 
 ```
-In the specification of service *Apply*, you notice the *xsi:type="functionExpression"* that is used to call ordinary precompiled programs to help the registration comittee. In the current case, the programs coded in java constitute the ordinary functions of the service *Apply*. They help the school comittee to decide and suggest grant about an application. As mentioned above, there is no predefined execution order of ordinary functions or subservices (when they exist). Each function executes as soon as it inputs are available. When it execution finishes the outputs it returns may authorized the execution of other waiting functions. Note also the xml element ** < guard > ** . *Guard* are used to control the activation of a decomposition according to the form of the service inputs. In the current case the guard *cb.Apply.guardDecide* will authorized the execution of the decomposition rule *decide* if the student has provided his resume 
+In the specification of service *Apply*, you notice the *xsi:type="functionExpression"* that is used to call ordinary precompiled programs to help the registration comittee. In the current case, the programs coded in java constitute the ordinary functions of the service *Apply*. They help the school comittee to decide and suggest grant about an application. As mentioned above, there is no predefined execution order of ordinary functions or subservices (when they exist). Each function executes as soon as it inputs are available. When it execution finishes the outputs it returns may authorized the execution of other waiting functions. Note also the xml element ** < guard > ** . *Guard* are used to control the activation of a decomposition according to the form of the service inputs. In the current case the guard *cb.Apply.guardDecide* will authorized the execution of the decomposition rule *decide* if the student has already provided his resume. However, more advanced guards can be defined according to the problem at hand. Besides, many decomposition rules can be attached to a same service with differents guards. 
