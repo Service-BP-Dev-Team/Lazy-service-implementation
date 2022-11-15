@@ -41,3 +41,139 @@ In this manner, an intuitive way to define the composite service handling the en
 **Subscribe**( class, decision, debitCredential/Grant)⟨receipt⟩;
 
 }
+
+This intuitive specification, can then be translated to the current xml specification :
+
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GAG name="My GAG">
+	<service axiom="true" name="Register" >
+	    <input name="personal information" shortName="infos" />
+		<input name="cover letter" shortName="letter" />
+		<input name="resume" shortName="resume" />
+		<input name="class" shortName="class" />
+		<input name="debit" shortName="debit" />
+		
+		<output name="decision" shortName="decision" />
+		<output name="grant suggestion" shortName="suggestion" />
+		<output name="receipt" shortName="receipt" />
+		<production name="Process" subServices="Apply Subscribe">
+		
+			<semantic>
+				<action>
+					<leftpart service="Register" parameter="decision" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Apply" parameter="decision" />
+				</action>
+				<action>
+					<leftpart service="Register" parameter="grant suggestion" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Apply" parameter="grant suggestion" />
+				</action>
+				<action>
+					<leftpart service="Register" parameter="receipt" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Subscribe" parameter="receipt" />
+				</action>
+				<action>
+					<leftpart service="Apply" parameter="personal information" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Register" parameter="personal information" />
+				</action>
+				
+				<action>
+					<leftpart service="Apply" parameter="cover letter" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Register" parameter="cover letter" />
+				</action>
+				
+				<action>
+					<leftpart service="Apply" parameter="resume" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Register" parameter="resume" />
+				</action>
+				<action>
+					<leftpart service="Subscribe" parameter="decision" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Apply" parameter="decision" />
+				</action>
+				<action>
+					<leftpart service="Subscribe" parameter="class" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Register" parameter="class" />
+				</action>
+				<action>
+					<leftpart service="Subscribe" parameter="debit" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="idExpression" service="Register" parameter="debit" />
+				</action>
+			</semantic>
+		</production>
+	</service>
+	</GAG>
+```
+
+The code above describe the complete behavior of the composite service *register* without any arbitrary execution order of subservices. All that matter is the dependency relation of attribute which are defined with action semantic. the *xsi:type="idExpression"* it used to specify that two service parameter are equals. One can further refine the service *Apply* with its behavior with the following code.
+
+```xml
+<service name="Apply"  >
+	 <input name="personal information" shortName="infos" />
+		<input name="cover letter" shortName="letter" />
+		<input name="resume" shortName="resume" />
+        <output name="syst" shortName="syst" />		 
+		<output name="decision" shortName="decision" />
+		<output name="grant suggestion" shortName="suggestion" />
+		<production name="decide" subServices="">
+		<guard location="..\LocalFunctions\bin" method="cb.Apply.guardDecide" />
+		 <semantic>
+			  <function-declaration
+					location="..\LocalFunctions\bin" method="cb.Apply.system" name="system" />
+			  <function-declaration
+					location="..\LocalFunctions\bin" method="cb.Apply.decide" name="decide" />
+			 <function-declaration
+					location="..\LocalFunctions\bin" method="cb.Apply.grant" name="grant" />
+		    
+				<action>
+					<leftpart service="Apply" parameter="decision" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="functionExpression" function="decide">
+						<arg service="Apply" parameter="syst" />
+					</rightpart>
+				</action>
+			<action>
+					<leftpart service="Apply" parameter="syst" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="functionExpression" function="system">
+						<arg service="Apply" parameter="personal information" />
+						<arg service="Apply" parameter="cover letter" />
+						<arg service="Apply" parameter="resume" />
+					</rightpart>
+				</action>
+				<action>
+					<leftpart service="Apply" parameter="grant suggestion" />
+					<rightpart
+						xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:type="functionExpression" function="grant">
+						<arg service="Apply" parameter="syst" />
+					</rightpart>
+				</action>
+		 </semantic>
+		
+		</production>
+		
+		
+	</service>
+
+```
+In the specification of service *Apply* you notice the *xsi:type="functionExpression"* that is used to call ordinary precompiled programs to help the school member in charge of applications, to take a decision. In the current case the programs coded in java constitute the ordinary functions of the service apply. They help the school comittee to decide and suggest grant about an application. As mentioned above there is not predefined execution order of ordinary functions. Each function executes as soon as it inputs are available. When it execution finishes the outputs it returns may authorized the execution of other waiting functions. 
