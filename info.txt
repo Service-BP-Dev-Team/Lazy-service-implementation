@@ -1,0 +1,6 @@
+info Student A
+letter https://a.letter/studenta.pdf
+resume https://a.resume/studenta.pdf
+class Week day
+grant Grant C
+

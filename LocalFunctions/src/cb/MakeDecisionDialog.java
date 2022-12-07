@@ -35,6 +35,8 @@ public class MakeDecisionDialog extends JFrame {
 	private JButton cancelButton;
 	private Treatment treatment;
 
+	public static String[] availableDecisionChoices= new String[] {"Accept","Reject"};
+	public static String[] availableGrantChoices= new String[] {"", "Grant A", "Grant B", "Grant C", "Grant D"};
 	/**
 	 * Launch the application.
 	 */
@@ -83,7 +85,7 @@ public class MakeDecisionDialog extends JFrame {
 			}
 			{
 				comboBoxDecision = new JComboBox();
-				comboBoxDecision.setModel(new DefaultComboBoxModel(new String[] {"Accept", "Reject"}));
+				comboBoxDecision.setModel(new DefaultComboBoxModel(availableDecisionChoices));
 				bodyPanel.add(comboBoxDecision);
 			}
 			{
@@ -92,7 +94,7 @@ public class MakeDecisionDialog extends JFrame {
 			}
 			{
 				comboBoxGrant = new JComboBox();
-				comboBoxGrant.setModel(new DefaultComboBoxModel(new String[] {"", "Grant A", "Grant B", "Grant C", "Grant D"}));
+				comboBoxGrant.setModel(new DefaultComboBoxModel(availableGrantChoices));
 				bodyPanel.add(comboBoxGrant);
 			}
 		}
@@ -131,18 +133,22 @@ public class MakeDecisionDialog extends JFrame {
 		if(systTreatment.getDecision()) {
 			lblSystem.setText("The system propose to accept the application and suggest the "+systTreatment.getGrant()+".");
 		}else {
-			lblSystem.setText("The system propose to resject the application.");
+			lblSystem.setText("The system propose to reject the application.");
 		}
 		okButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String txtDecision = comboBoxDecision.getSelectedItem().toString().trim();
+				int index=comboBoxDecision.getSelectedIndex();
+				if(index==-1) {index=1;}// by default we reject
+				String txtDecision = availableDecisionChoices[index];
 				System.out.println("the txt decision is: "+txtDecision);
 				if(txtDecision.equals("Accept")) {
 					result.setDecision(true);
-					result.setGrant(comboBoxGrant.getSelectedItem().toString().trim());
+					int grantIndex= comboBoxGrant.getSelectedIndex();
+					if(grantIndex==-1) {grantIndex=0;}//by the default we place an empty grant
+					result.setGrant(availableGrantChoices[grantIndex]);
 				}else {
 					result.setDecision(false);
 					result.setGrant("");

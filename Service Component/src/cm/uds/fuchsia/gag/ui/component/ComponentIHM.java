@@ -92,17 +92,23 @@ public class ComponentIHM {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
-		/*
+		
 		try {
 			// UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel");
-			UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+			//UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+			UIManager.LookAndFeelInfo[] looks = UIManager.getInstalledLookAndFeels();
+	        for (UIManager.LookAndFeelInfo look : looks) {
+	            System.out.println(look.getClassName());
+	        }
+			//UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
 			Logger.getLogger(ComponentIHM.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);

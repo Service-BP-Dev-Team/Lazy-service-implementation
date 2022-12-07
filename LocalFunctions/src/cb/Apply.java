@@ -15,14 +15,13 @@ public class Apply {
 		
 		if(res.length()>=4)
 		{
-			String lastVal= res.substring(res.length() - 4);
-		    String numberSt=""+lastVal.charAt(0);
-		    int number=Integer.parseInt(numberSt);
-		    if(number % 2 ==0) {
-		    	Random rand = new Random();
-		    	int rd=rand.nextInt(4);
+			Random rand = new Random();
+	    	int rd=rand.nextInt(500);
+		    if(rd % 2 ==0) {
+		    	Random randGrant = new Random();
+		    	int rdg=rand.nextInt(4);
 		    	treatment.setDecision(true);
-		    	treatment.setGrant(array[rd]);
+		    	treatment.setGrant(array[rdg]);
 		    }
 		}
 
