@@ -1,9 +1,11 @@
 # Setup and run the project
 
 The present repository stores the different java projects necessary to deploy and execute, service oriented and component-based applications specified with lazy services. The whole repository corresponds to an eclipse workspace constituted of three projects. By doing so, the easiest way to run the project is to clone the repository and used it as the workspace of an eclipse application. Here are the complete list of steps to setup the project in your computer:
+- Install the latest version of java  and add the java bin directory to the path;
 - Download the latest version of eclipse for java here : https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-java-developers ;
 - Clone (using *git clone*) or download the repository;
-- Extract and launch eclipse using the folder of the cloned repository as the eclipse workspace;.
+- Extract and launch eclipse using the folder of the cloned repository as the eclipse workspace;
+- Install the xtend plugin on the launched eclipse. Restart eclipse after the installation.
 
 In order to test the behavior of lazy services, you can run the small example of  computer science school enrollment present in the repository. The example is described in the *Running example* section. Follow these steps to run the example:
 - Run the first component by running the configuration *LauncherCA*;
