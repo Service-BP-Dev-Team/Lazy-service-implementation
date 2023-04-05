@@ -1,0 +1,238 @@
+package cm.uds.fuchsia.deploy.app;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+public class IHM extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_eclipse;
+	private JTextField textField_son;
+	private DeploymentConfiguration deploymentConfiguration;
+	private JButton btnBrowseEclipse;
+	private JButton btnBrowseMiddleware;
+	private JFileChooser fileChooser;
+	private AddComponentDialog addComponentDialog;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					IHM frame = new IHM();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public IHM() {
+		try {
+			// UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel");
+			UIManager.setLookAndFeel("com.alee.laf.WebLookAndFeel");
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+			Logger.getLogger(IHM.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		deploymentConfiguration = new DeploymentConfiguration();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 563, 397);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelDeploymentLocation = new JPanel();
+		contentPane.add(panelDeploymentLocation, BorderLayout.NORTH);
+		
+		JPanel panelDeployableComponent = new JPanel();
+		panelDeploymentLocation.setPreferredSize(new Dimension(contentPane.getPreferredSize().width,100));
+		panelDeploymentLocation.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		panelDeploymentLocation.add(panel, BorderLayout.NORTH);
+		
+		JLabel lblDepLoc = new JLabel("Deployment Location");
+		panel.add(lblDepLoc);
+		
+		JPanel panelLocationContent = new JPanel();
+		panelDeploymentLocation.add(panelLocationContent, BorderLayout.CENTER);
+		panelLocationContent.setLayout(new GridLayout(2, 1, 0, 0));
+		
+		JPanel panel_eclipse = new JPanel();
+		panelLocationContent.add(panel_eclipse);
+		panel_eclipse.setLayout(new BorderLayout(10, 10));
+		
+		JPanel panel_eclipse_right = new JPanel();
+		panel_eclipse.add(panel_eclipse_right, BorderLayout.EAST);
+		panel_eclipse_right.setLayout(new BorderLayout(0, 0));
+		
+		btnBrowseEclipse = new JButton("Parcourir");
+		panel_eclipse_right.add(btnBrowseEclipse, BorderLayout.CENTER);
+		
+		JPanel panel_eclipse_center = new JPanel();
+		panel_eclipse.add(panel_eclipse_center, BorderLayout.CENTER);
+		panel_eclipse_center.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_eclipse_left = new JPanel();
+		panel_eclipse.add(panel_eclipse_left, BorderLayout.WEST);
+		panel_eclipse_left.setLayout(new BorderLayout(0, 0));
+		JLabel lblEclipse = new JLabel("Eclipse Location");
+		panel_eclipse_left.add(lblEclipse);
+		
+		textField_eclipse = new JTextField();
+		panel_eclipse_center.add(textField_eclipse, BorderLayout.CENTER);
+		textField_eclipse.setColumns(10);
+		
+		JPanel panel_middleware_son = new JPanel();
+		panelLocationContent.add(panel_middleware_son);
+		panel_middleware_son.setLayout(new BorderLayout(10, 10));
+		
+		
+		JPanel panel_middleware_right = new JPanel();
+		panel_middleware_son.add(panel_middleware_right, BorderLayout.EAST);
+		panel_middleware_right.setLayout(new BorderLayout(0, 0));
+		
+		btnBrowseMiddleware = new JButton("Parcourir");
+		panel_middleware_right.add(btnBrowseMiddleware, BorderLayout.CENTER);
+		
+		JPanel panel_middleware_center = new JPanel();
+		panel_middleware_son.add(panel_middleware_center, BorderLayout.CENTER);
+		panel_middleware_center.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_middleware_left = new JPanel();
+		panel_middleware_son.add(panel_middleware_left, BorderLayout.WEST);
+		panel_middleware_left.setLayout(new BorderLayout(0, 0));
+		JLabel lblmiddleware = new JLabel("Middleware Location");
+		panel_middleware_left.add(lblmiddleware);
+		
+		textField_son = new JTextField();
+		panel_middleware_center.add(textField_son, BorderLayout.CENTER);
+		textField_son.setColumns(10);
+		
+		//uniform size
+		lblEclipse.setPreferredSize(lblmiddleware.getPreferredSize());
+		contentPane.add(panelDeployableComponent, BorderLayout.CENTER);
+		panelDeployableComponent.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelDeployableComponentSeparator = new JPanel();
+		panelDeployableComponentSeparator.setPreferredSize(new Dimension(contentPane.getPreferredSize().width,20));
+		panelDeployableComponent.add(panelDeployableComponentSeparator, BorderLayout.NORTH);
+		
+		JPanel panel_1 = new JPanel();
+		panelDeployableComponent.add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelDeployableComponentTitle = new JPanel();
+		panel_1.add(panelDeployableComponentTitle, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel = new JLabel("Components to deploy");
+		panelDeployableComponentTitle.add(lblNewLabel);
+		
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelDeployableComponentAddBtn = new JPanel();
+		panel_2.add(panelDeployableComponentAddBtn, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("+Add");
+		panelDeployableComponentAddBtn.add(btnNewButton);
+		
+		JPanel componentsToDeployList = new JPanel();
+		panel_2.add(componentsToDeployList, BorderLayout.CENTER);
+		componentsToDeployList.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panelDeployBtn = new JPanel();
+		componentsToDeployList.add(panelDeployBtn, BorderLayout.SOUTH);
+		panelDeployBtn.setPreferredSize(new Dimension(contentPane.getPreferredSize().width,40));
+		panelDeployBtn.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_3 = new JPanel();
+		panelDeployBtn.add(panel_3, BorderLayout.EAST);
+		
+		JButton btnDeploy = new JButton("Deploy");
+		panel_3.add(btnDeploy);
+		btnDeploy.setPreferredSize(new Dimension((int)btnDeploy.getPreferredSize().getWidth()+10,(int)btnDeploy.getPreferredSize().getHeight()+10));
+		
+		addEvents();
+	}
+
+	
+	private void addEvents() {
+		final IHM me=this;
+		this.btnBrowseEclipse.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JFileChooser j = me.getJfileChooser();
+				j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				
+				int returnVal = j.showSaveDialog(me);
+				 if (returnVal == JFileChooser.APPROVE_OPTION) {
+			            File file = j.getSelectedFile();
+			            //This is where a real application would open the file.
+			            textField_eclipse.setText(file.getAbsolutePath()); 
+			        } else {
+			            System.out.println("Open command cancelled by user.");
+			        }
+			}
+		});
+		
+	this.btnBrowseMiddleware.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JFileChooser j = me.getJfileChooser();
+				j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				
+				int returnVal = j.showSaveDialog(me);
+				 if (returnVal == JFileChooser.APPROVE_OPTION) {
+			            File file = j.getSelectedFile();
+			            //This is where a real application would open the file.
+			            textField_son.setText(file.getAbsolutePath()); 
+			        } else {
+			            System.out.println("Open command cancelled by user.");
+			        }
+			}
+		});
+	}
+
+	protected JFileChooser getJfileChooser() {
+		// TODO Auto-generated method stub
+		if(this.fileChooser==null) {
+			this.fileChooser = new JFileChooser();
+		}
+		return fileChooser;
+	}
+}

@@ -1,0 +1,17 @@
+INDEX VERSION 1.131+C:\Users\DELL\Desktop\Implementation\Lazy-Services\Lazy-service-implementation\.metadata\.plugins\org.eclipse.jdt.core
+1803546961.index
+33734964.index
+1302710690.index
+4003521108.index
+1585018488.index
+3841128390.index
+1363771841.index
+298547794.index
+3728650067.index
+1510847902.index
+186779449.index
+2139904359.index
+2725591389.index
+2543298987.index
+996850888.index
+2273371833.index

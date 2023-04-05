@@ -1,0 +1,9 @@
+package cm.uds.fuchsia.deploy.app;
+
+public class ComponentInformation {
+	private String specificationLocation;
+	private String componentName;
+	
+	
+
+}

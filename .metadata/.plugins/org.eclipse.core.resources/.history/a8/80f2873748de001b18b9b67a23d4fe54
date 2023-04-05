@@ -1,0 +1,8 @@
+package cm.uds.fuchsia.deploy.app;
+
+public class DeploymentConfiguration {
+
+	private String eclipseLocation;
+	private String middlewareLocation;
+	private ArrayList<ComponentInformation> componentInformationList;
+}

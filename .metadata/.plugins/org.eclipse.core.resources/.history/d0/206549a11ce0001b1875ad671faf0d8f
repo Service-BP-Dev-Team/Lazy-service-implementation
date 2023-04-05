@@ -1,0 +1,184 @@
+package cm.uds.fuchsia.deploy.app;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.GridBagLayout;
+import javax.swing.SpringLayout;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.awt.event.ActionEvent;
+
+public class AddComponentDialog extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField textFieldComponentName;
+	private JLabel lblSpecification;
+	private JLabel lblName;
+	private ComponentInformation componentInformation;
+	private JFileChooser jFileChooser;
+	private JTextField textFieldSpecification;
+	private JPanel panel_name_left;
+	private JButton btnSpecification;
+	private IHM ihm;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			AddComponentDialog dialog = new AddComponentDialog();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public AddComponentDialog() {
+		setTitle("Nouveau Composant");
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		SpringLayout sl_contentPanel = new SpringLayout();
+		contentPanel.setLayout(sl_contentPanel);
+		
+		componentInformation = new ComponentInformation();
+		
+		
+		JPanel panel = new JPanel();
+		sl_contentPanel.putConstraint(SpringLayout.NORTH, panel, -174, SpringLayout.SOUTH, contentPanel);
+		sl_contentPanel.putConstraint(SpringLayout.WEST, panel, 37, SpringLayout.WEST, contentPanel);
+		sl_contentPanel.putConstraint(SpringLayout.SOUTH, panel, -67, SpringLayout.SOUTH, contentPanel);
+		sl_contentPanel.putConstraint(SpringLayout.EAST, panel, -42, SpringLayout.EAST, contentPanel);
+		contentPanel.add(panel);
+		panel.setLayout(new GridLayout(2, 1, 0, 0));
+		{
+			JPanel panel_1 = new JPanel();
+			panel.add(panel_1);
+			panel_1.setLayout(new BorderLayout(10, 10));
+			{
+				JPanel panel_2 = new JPanel();
+				panel_1.add(panel_2, BorderLayout.WEST);
+				panel_2.setLayout(new BorderLayout(0, 0));
+				{
+					lblName = new JLabel("Name");
+					panel_2.add(lblName, BorderLayout.CENTER);
+				}
+			}
+			{
+				textFieldComponentName = new JTextField();
+				panel_1.add(textFieldComponentName, BorderLayout.CENTER);
+				textFieldComponentName.setColumns(10);
+			}
+			
+			panel_name_left = new JPanel();
+			panel_1.add(panel_name_left, BorderLayout.EAST);
+		}
+		{
+			JPanel panel_1 = new JPanel();
+			panel.add(panel_1);
+			panel_1.setLayout(new BorderLayout(10, 10));
+			{
+				JPanel panel_2 = new JPanel();
+				panel_1.add(panel_2, BorderLayout.WEST);
+				panel_2.setLayout(new BorderLayout(0, 0));
+				{
+					lblSpecification = new JLabel("Specification");
+					panel_2.add(lblSpecification, BorderLayout.CENTER);
+				}
+			}
+			
+			btnSpecification = new JButton("Browse");
+			btnSpecification.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			panel_1.add(btnSpecification, BorderLayout.EAST);
+			
+			textFieldSpecification = new JTextField();
+			panel_1.add(textFieldSpecification, BorderLayout.CENTER);
+			textFieldSpecification.setColumns(10);
+		}
+		lblName.setPreferredSize(lblSpecification.getPreferredSize());
+		panel_name_left.setPreferredSize(btnSpecification.getPreferredSize());
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
+		
+		addEvents();
+	}
+
+	public ComponentInformation getComponentInformation() {
+		return componentInformation;
+	}
+
+	public void setComponentInformation(ComponentInformation componentInformation) {
+		this.componentInformation = componentInformation;
+	}
+
+	public JFileChooser getjFileChooser() {
+		if(jFileChooser==null) {
+			jFileChooser =new JFileChooser();
+		}
+		return jFileChooser;
+	}
+
+	public void setjFileChooser(JFileChooser jFileChooser) {
+		this.jFileChooser = jFileChooser;
+	}
+	
+	public void addEvents() {
+		final AddComponentDialog me=this;
+		this.btnSpecification.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JFileChooser j = me.getjFileChooser();
+				j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				
+				int returnVal = j.showSaveDialog(me);
+				 if (returnVal == JFileChooser.APPROVE_OPTION) {
+			            File file = j.getSelectedFile();
+			            //This is where a real application would open the file.
+			            textFieldSpecification.setText(file.getAbsolutePath()); 
+			        } else {
+			            System.out.println("Open command cancelled by user.");
+			        }
+			}
+			
+		});
+	}
+
+	public void setIHM(IHM ihm) {
+		this.ihm=ihm;
+		
+	}
+}

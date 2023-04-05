@@ -1,0 +1,30 @@
+package cm.uds.fuchsia.deploy.app;
+
+import java.util.ArrayList;
+
+public class DeploymentConfiguration {
+
+	private String eclipseLocation;
+	private String middlewareLocation;
+	private ArrayList<ComponentInformation> componentInformationList;
+	public String getEclipseLocation() {
+		return eclipseLocation;
+	}
+	public void setEclipseLocation(String eclipseLocation) {
+		this.eclipseLocation = eclipseLocation;
+	}
+	public String getMiddlewareLocation() {
+		return middlewareLocation;
+	}
+	public void setMiddlewareLocation(String middlewareLocation) {
+		this.middlewareLocation = middlewareLocation;
+	}
+	public ArrayList<ComponentInformation> getComponentInformationList() {
+		return componentInformationList;
+	}
+	public void setComponentInformationList(ArrayList<ComponentInformation> componentInformationList) {
+		this.componentInformationList = componentInformationList;
+	}
+	
+	
+}

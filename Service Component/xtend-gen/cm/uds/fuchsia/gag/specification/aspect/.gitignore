@@ -3,3 +3,13 @@
 /.OutputInterface.java._trace
 /.ServiceAspect.java._trace
 /.GAGAspect.java._trace
+/.GAGAspect.xtendbin
+/.GAGGraphAspect.xtendbin
+/.GuardAspect.xtendbin
+/.OutputInterface.xtendbin
+/.ServiceAspect.xtendbin
+/GAGAspect.java
+/GAGGraphAspect.java
+/GuardAspect.java
+/OutputInterface.java
+/ServiceAspect.java

@@ -2,3 +2,11 @@
 /.DataAspect.java._trace
 /.PendingLocalFunctionComputationAspect.java._trace
 /.TaskAspect.java._trace
+/.ConfigurationAspect.xtendbin
+/.DataAspect.xtendbin
+/.PendingLocalFunctionComputationAspect.xtendbin
+/.TaskAspect.xtendbin
+/ConfigurationAspect.java
+/DataAspect.java
+/PendingLocalFunctionComputationAspect.java
+/TaskAspect.java
