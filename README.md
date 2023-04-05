@@ -1,6 +1,6 @@
 # Setup and run the project
 
-The present repository stores the different java projects necessary to deploy and execute, service oriented and component-based applications specified with lazy services. The whole repository corresponds to an eclipse workspace constituted of three projects. By doing so, the easiest way to run the project is to clone the repository and used it as the workspace of an eclipse application. Here are the complete list of steps to setup the project in your computer:
+The present repository stores the different java projects necessary to deploy and execute, service oriented and component-based applications specified with lazy services. The whole repository corresponds to an eclipse workspace constituted of three projects. By doing so, the easiest way to run the project is to clone the repository and used it as the workspace of an eclipse application. Here are the complete list of steps to setup the project in your computer with a windows system:
 - Install the latest version of java  and add the java bin directory to the path;
 - Download the latest version of eclipse for java here : https://www.eclipse.org/downloads/packages/release/2022-09/r/eclipse-ide-java-developers ;
 - Clone (using *git clone*) or download the repository;
