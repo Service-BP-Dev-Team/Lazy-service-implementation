@@ -230,7 +230,7 @@ public class RequestForm {
 		 try {
 			 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 				path=path.replaceAll("%20", " ");
-				path+="\\requestFile.req";
+				path+="/requestFile.req";
 	            FileOutputStream fileOut = new FileOutputStream(path);
 	            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 	            objectOut.writeObject(req);

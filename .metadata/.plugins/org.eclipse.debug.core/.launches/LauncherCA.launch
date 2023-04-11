@@ -13,6 +13,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="main.Launcher"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="Service Component"/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-p 888 -nm &quot;CA&quot; -s &quot;..\starter\gag-specification\CA.xml&quot; -n &quot;..\starter\network.xml&quot;"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-p 9888 -nm &quot;CA&quot; -s &quot;../starter/gag-specification/CA.xml&quot; -n &quot;../starter/network.xml&quot;"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="Service Component"/>
 </launchConfiguration>

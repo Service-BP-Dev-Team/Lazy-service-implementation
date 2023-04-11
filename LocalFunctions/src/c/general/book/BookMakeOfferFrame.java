@@ -239,7 +239,7 @@ public class BookMakeOfferFrame {
 	try {
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			path=path.replaceAll("%20", " ");
-			path+="\\..\\myBin\\offerFile.req";
+			path+="/../myBin/offerFile.req";
            FileOutputStream fileOut = new FileOutputStream(path);
            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
            objectOut.writeObject(off);

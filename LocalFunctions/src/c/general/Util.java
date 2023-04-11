@@ -25,7 +25,7 @@ public class Util {
 	String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 	//String path="";
 	path=path.replaceAll("%20", " ");
-	path+="\\..\\myBin\\"+counter;
+	path+="/../myBin/"+counter;
 	return readFromFile(path);
     }
 	
@@ -35,7 +35,7 @@ public class Util {
 	String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 	//String path="";
 	path=path.replaceAll("%20", " ");
-	path+="\\..\\myBin\\"+counter;
+	path+="/../myBin/"+counter;
 	createInFile(obj, path);
       
 	}

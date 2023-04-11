@@ -16,7 +16,7 @@ public class Util {
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		//String path="";	
 		 path=path.replaceAll("%20", " ");
-			path+="\\..\\myBin\\offerFile.req";
+			path+="/../myBin/offerFile.req";
 			File file = new File(path);
        
 	        if(file.exists())

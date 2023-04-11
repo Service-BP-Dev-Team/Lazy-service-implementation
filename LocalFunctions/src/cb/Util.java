@@ -1,13 +1,16 @@
 package cb;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 
@@ -29,7 +32,7 @@ public class Util {
 	String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 	//String path="";
 	path=path.replaceAll("%20", " ");
-	path+="\\..\\myBin\\"+counter;
+	path+="/../myBin/"+counter;
 	return readFromFile(path);
     }
 	
@@ -39,7 +42,7 @@ public class Util {
 	String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 	//String path="";
 	path=path.replaceAll("%20", " ");
-	path+="\\..\\myBin\\"+counter;
+	path+="/../myBin/"+counter;
 	createInFile(obj, path);
       
 	}
@@ -84,7 +87,7 @@ public class Util {
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			//String path="";
 		    path=path.replaceAll("%20", " ");
-			path+="\\..\\myBin\\treamentFile.req";
+			path+="/../myBin/treamentFile.req";
 			File file = new File(path);
        
 	        if(file.delete())
@@ -103,13 +106,35 @@ public static Treatment getUserTreatment(Treatment treatment){
 		String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		System.out.println("the path is "+path);
 		path=path.replaceAll("%20", " ");
+		Path oPath = Paths.get(path);
+		path=oPath.normalize().toString();
 		String commpleteLibs="weblaf-demo-1.2.13-jar-with-dependencies.jar";
 		String minimalLibs="weblaf-complete-1.29.jar";
-		String libs=path+"..\\libs\\"+minimalLibs;
+		String libs=path+"../libs/"+minimalLibs;
 		Runtime rt = Runtime.getRuntime();
 		try {
 			System.out.println("running command line");
-			Process pr = rt.exec("java -cp \""+path+"\";\""+libs+"\" cb.MakeDecisionDialog -d "+(treatment.getDecision()?"Yes":"No")+" -g "+treatment.getGrant());
+			String toExec = "java -classpath "+path+""+" cb.MakeDecisionDialog -d "+(treatment.getDecision()?"Yes":"No")+" -g "+treatment.getGrant();
+			System.out.println(toExec);
+			Process pr = rt.exec(toExec);
+			BufferedReader stdInput = new BufferedReader(new 
+				     InputStreamReader(pr.getInputStream()));
+
+				BufferedReader stdError = new BufferedReader(new 
+				     InputStreamReader(pr.getErrorStream()));
+
+				// Read the output from the command
+				System.out.println("Here is the standard output of the command:\n");
+				String s = null;
+				while ((s = stdInput.readLine()) != null) {
+				    System.out.println(s);
+				}
+
+				// Read any errors from the attempted command
+				System.out.println("Here is the standard error of the command (if any):\n");
+				while ((s = stdError.readLine()) != null) {
+				    System.out.println(s);
+				}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -125,7 +150,7 @@ public static Treatment fetchUserTreatment(){
 	 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 	//String path="";	
 	 path=path.replaceAll("%20", " ");
-		path+="\\..\\myBin\\treatmentFile.req";
+		path+="/../myBin/treatmentFile.req";
 		File file = new File(path);
   
        if(file.exists())

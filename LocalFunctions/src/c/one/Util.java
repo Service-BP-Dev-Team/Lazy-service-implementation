@@ -15,10 +15,10 @@ public class Util {
 		String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		//String path="";
 		path=path.replaceAll("%20", " ");
-		c.general.Util.createInFile(offer, path+"\\..\\myBin\\offerFile.req");
+		c.general.Util.createInFile(offer, path+"/../myBin/offerFile.req");
 		String commpleteLibs="weblaf-demo-1.2.13-jar-with-dependencies.jar";
 		String minimalLibs="weblaf-complete-1.29.jar";
-		String libs=path+"..\\libs\\"+minimalLibs;
+		String libs=path+"../libs/"+minimalLibs;
 		deleteConfirmationIfItExist();
 		Runtime rt = Runtime.getRuntime();
 		try {
@@ -39,7 +39,7 @@ public class Util {
 		path=path.replaceAll("%20", " ");
 		String commpleteLibs="weblaf-demo-1.2.13-jar-with-dependencies.jar";
 		String minimalLibs="weblaf-complete-1.29.jar";
-		String libs=path+"..\\libs\\"+minimalLibs;
+		String libs=path+"../libs/"+minimalLibs;
 		Runtime rt = Runtime.getRuntime();
 		try {
 			System.out.println("running command line");
@@ -55,7 +55,7 @@ public class Util {
 	public static void deleteRequestIfItExist(){
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			path=path.replaceAll("%20", " ");
-			path+="\\requestFile.req";
+			path+="/requestFile.req";
 			File file = new File(path);
          
 	        if(file.delete())
@@ -72,7 +72,7 @@ public class Util {
 		 Request req =null; 
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			path=path.replaceAll("%20", " ");
-			path+="\\requestFile.req";
+			path+="/requestFile.req";
 			File file = new File(path);
         
 	        if(file.exists())
@@ -114,7 +114,7 @@ public class Util {
 	public static void deleteConfirmationIfItExist(){
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			path=path.replaceAll("%20", " ");
-			path+="\\..\\myBin\\confirmFile.req";
+			path+="/../myBin/confirmFile.req";
 			File file = new File(path);
         
 	        if(file.delete())
@@ -131,7 +131,7 @@ public class Util {
 		 Boolean req =null; 
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			path=path.replaceAll("%20", " ");
-			path+="\\..\\myBin\\confirmFile.req";
+			path+="/../myBin/confirmFile.req";
 			File file = new File(path);
        
 	        if(file.exists())

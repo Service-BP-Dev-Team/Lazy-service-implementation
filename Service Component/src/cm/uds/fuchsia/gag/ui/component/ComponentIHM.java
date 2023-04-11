@@ -103,10 +103,10 @@ public class ComponentIHM {
 			//UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-			Logger.getLogger(ComponentIHM.class.getName()).log(Level.SEVERE, null, ex);
+			 // Logger.getLogger(ComponentIHM.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		
 		

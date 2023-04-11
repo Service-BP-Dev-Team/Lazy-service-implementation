@@ -137,7 +137,7 @@ public class ConfirmOfferIHM {
 	public void getOffer(){
 		 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			path=path.replaceAll("%20", " ");
-			path+="\\..\\myBin\\offerFile.req";
+			path+="/../myBin/offerFile.req";
 			Offer offer= (Offer)c.general.Util.readFromFile(path);
 			if(offer!=null){
 				lblPrice.setText(offer.getPrice()+"");
@@ -152,7 +152,7 @@ public class ConfirmOfferIHM {
 		try {
 			 String path=Util.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 				path=path.replaceAll("%20", " ");
-				path+="\\..\\myBin\\confirmFile.req";
+				path+="/../myBin/confirmFile.req";
 	            FileOutputStream fileOut = new FileOutputStream(path);
 	            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
 	            objectOut.writeObject(confirm);
